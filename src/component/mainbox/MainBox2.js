@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import Calculator from '../Calculator';
 
 const MainBox2Wrapper = styled.div`
   flex: 1;
@@ -10,7 +11,7 @@ const MainBox2Wrapper = styled.div`
 const MainBox2 = () => {
   return (
     <MainBox2Wrapper>
-      <div>계산기</div>
+      <Calculator />
     </MainBox2Wrapper>
   );
 };
