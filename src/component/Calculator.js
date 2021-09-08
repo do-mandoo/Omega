@@ -1,183 +1,229 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
-const Wrapper = styled.div`
+const ButtonWrap = styled.button`
+  color: #000;
+  width: 75px;
+  height: 58px;
   padding: 0;
   margin: 0;
-  .container {
-    max-width: 400px;
-    min-height: 37vh;
-    margin: 20px auto;
-    background-color: #000;
-    border-radius: 5px;
-    border: 1px solid rgba(0, 0, 0, 0.01);
+  font-size: 40px;
+  text-align: center;
+  border-radius: 12px;
+  border: groove;
+  box-shadow: 1px 1px 1px 1px grey;
+  cursor: pointer;
+  :active {
+    position: relative;
+    top: 2px;
+    box-shadow: 1px 0px 0px 0px grey;
   }
-  button {
-    font-size: 20px;
-    font-weight: bold;
-    /* border: 1px solid rgba(0, 0, 0, 0.35); */
-    border: none;
-    margin: 1px;
-    cursor: pointer;
-    border-radius: 5px;
-  }
-  .subGrid1 button {
-    background-color: #fff;
-  }
-  .subGrid2 button {
-    background-color: orange;
-    width: 100px;
-  }
-  .container,
-  .subGrid1,
-  .subGrid2 {
-    display: grid;
-  }
-  .container {
-    grid-template-areas:
-      'total total total total'
-      'modif modif modif oper'
-      'digit digit digit oper'
-      'digit digit digit oper'
-      'digit digit digit oper'
-      'digit digit digit oper';
-    grid-auto-columns: 1fr;
-  }
-  .showInput {
-    grid-area: total;
-    display: flex;
-    justify-content: flex-end;
-    font-size: 32px;
-    font-weight: bold;
-    align-items: center;
-    background-color: #000;
-    color: #fff;
-    border-radius: 5px;
-    padding-right: 20px;
-    min-height: 45px;
-  }
-  .subGrid1 {
-    grid-area: modif;
-    grid-auto-flow: column;
-    grid-auto-columns: 1fr;
-  }
-  .subGrid2 {
-    grid-area: oper;
-  }
-  .digits {
-    grid-area: digit;
-    display: flex;
-    flex-wrap: wrap;
-  }
-  .digits button {
-    background-color: #a334a3;
-    color: #ddd;
-    flex: 1 0 26%;
+  :hover {
+    background-color: #aaa;
   }
 `;
 
-const Calculator = () => {
-  const [input, setInput] = useState('');
-  console.log(typeof input, 'typeofInput');
-  console.log(input, 'input');
-  console.log(input.length, 'inputLength');
-  const calcBtns = [];
-
-  // const perforOperations = () => {
-  //   switch (operation) {
-  //     case '+':
-  //       setResult(Number(firstNum) + Number(secondNum));
-  //       break;
-  //     case '-':
-  //       setResult(Number(firstNum) - Number(secondNum));
-  //       break;
-  //     case '*':
-  //       setResult(Number(firstNum) * Number(secondNum));
-  //       break;
-  //     case '/':
-  //       setResult(Number(firstNum) / Number(secondNum));
-  //       break;
-
-  //     default:
-  //       break;
-  //   }
-  // };
-
-  const onViewInput = e => {
-    setInput(input + e.target.value);
-  };
-
-  const total = e => {
-    console.log(e.target);
-    console.log(input, 'whatis');
-  };
-
-  [7, 8, 9, 4, 5, 6, 1, 2, 3, '±', 0, '.'].forEach(item => {
-    calcBtns.push(
-      <button
-        key={item}
-        value={item}
-        onClick={e => {
-          setInput(input + e.target.value);
-        }}
-      >
-        {''}
-        {item}
-      </button>,
-    );
-  });
-
+const CalcValue = props => {
   return (
-    <Wrapper>
-      <div className="container">
-        {''}
-        <div className="showInput">{input}</div>
-        <div className="digits">{calcBtns}</div>
-        <div className="subGrid1">
-          <button
-            onClick={() => {
-              if (input.typeof === Number && input.length === undefined) {
-                setInput('');
-                console.log('hihi');
-              } else if (input.length > 0) {
-                setInput(input.substring(0, input.length - 1));
-                console.log('byrbye');
-              }
-              // setInput(input.substring(0, input.length - 1));
-            }}
-          >
-            Delete
-          </button>
-          <button
-            onClick={e => {
-              setInput('');
-              console.log(typeof e.target);
-            }}
-            value=""
-          >
-            AllClear
-          </button>
-        </div>
-        <div className="subGrid2">
-          <button onClick={onViewInput} value="/">
-            /
-          </button>
-          <button onClick={onViewInput} value="*">
-            *
-          </button>
-          <button onClick={onViewInput} value="-">
-            -
-          </button>
-          <button onClick={onViewInput} value="+">
-            +
-          </button>
-          <button onClick={total} value="=">
-            =
-          </button>
-        </div>
-      </div>
-    </Wrapper>
+    <ButtonWrap
+      className={`${props.className}`}
+      onClick={() => {
+        props.onClick(props.keyvalue);
+      }}
+    >
+      {props.keyvalue}
+      {''}
+    </ButtonWrap>
   );
 };
+
+const CalcWrapper = styled.div`
+  .container {
+    width: 300px;
+    height: 350px;
+    display: grid;
+    /* border: 1px solid red; */
+    margin: auto;
+    margin-top: 10px;
+    /* background-color: lightgray; */
+    padding: 10px;
+    border: ridge;
+  }
+  .keyPad {
+    display: grid;
+    grid-template-columns: repeat(4, 75px);
+    grid-template-rows: repeat(5, 58px);
+    /* grid-gap: 1px; */
+    grid-template-areas:
+      'keysFuntion keysFuntion keysFuntion keysOperators'
+      'keysNumbers keysNumbers keysNumbers keysOperators'
+      'keysNumbers keysNumbers keysNumbers keysOperators'
+      'keysNumbers keysNumbers keysNumbers keysOperators'
+      'keysNumbers keysNumbers keysNumbers keysOperators';
+  }
+  .keysFuntion {
+    grid-area: keysFuntion;
+  }
+  .keysFuntion button {
+    background-color: lightpink;
+  }
+  .keysOperators {
+    grid-area: keysOperators;
+  }
+  .keysOperators button {
+    background-color: lightskyblue;
+  }
+  .keysNumbers {
+    grid-area: keysNumbers;
+    direction: rtl;
+  }
+  .keysNumbers button {
+    background-color: #f5c66f;
+  }
+  .input {
+    text-align: right;
+    border: ridge #000;
+    padding-right: 10px;
+    margin-bottom: 8px;
+  }
+  .result {
+    min-height: 45px;
+    font-size: xx-large;
+    font-weight: bold;
+  }
+`;
+
+function Calculator() {
+  const [prevValue, setPrevValue] = useState(null); // null
+  const [nextValue, setNextValue] = useState('0');
+  const [operator, setOperator] = useState(null); // null
+
+  useEffect(() => {}, [prevValue, nextValue, operator]);
+
+  const CalcOperator = {
+    // key : value(함수식)
+    '+': (firstValue, secondValue) => firstValue + secondValue,
+    '-': (firstValue, secondValue) => firstValue - secondValue,
+    '*': (firstValue, secondValue) => firstValue * secondValue,
+    '/': (firstValue, secondValue) => firstValue / secondValue,
+    '=': (firstValue, secondValue) => secondValue,
+  };
+
+  const performOperation = () => {
+    let temp = CalcOperator[operator](
+      // parseFloat() 함수는 문자열을 분석해서 부동소수점 실수로 반환한다. 분석할 수 없으면 NaN을 반환한다.
+      parseFloat(prevValue),
+      parseFloat(nextValue),
+    );
+    setOperator(null);
+    setNextValue(String(temp));
+    setPrevValue(null);
+  };
+
+  const handleNum = number => {
+    setNextValue(nextValue === '0' ? String(number) : nextValue + number);
+  };
+
+  const insertDot = () => {
+    // RegExp.prototype.test() 메서드는
+    // 주어진 문자열이 정규 표현식을 만족하는지 판별하고,
+    // 그 여부를 true, false로 반환한다.
+    if (!/\./.test(nextValue)) {
+      setNextValue(nextValue + '.');
+    }
+  };
+
+  const percent = () => {
+    setNextValue(parseFloat(nextValue) / 100);
+    if (prevValue && nextValue === '') {
+      setPrevValue(parseFloat(prevValue) / 100);
+    }
+  };
+
+  const plusMinus = () => {
+    setNextValue(parseFloat(nextValue) * -1);
+  };
+
+  const clearData = () => {
+    setNextValue('0');
+    setPrevValue(0);
+  };
+
+  const deleteData = () => {
+    setNextValue(nextValue.substring(0, nextValue.length - 1));
+  };
+
+  const handleOperation = value => {
+    // Number.isInteger() 메서드는 주어진 값이 정수인지 판별한다.
+    if (Number.isInteger(value)) {
+      console.log(1);
+      handleNum(parseInt(value, 10));
+    } else if (value in CalcOperator) {
+      console.log(2);
+      if (operator === null) {
+        console.log(3);
+        setOperator(value);
+        setPrevValue(nextValue);
+        setNextValue('');
+      }
+      if (operator) {
+        console.log(4);
+        console.log(operator, 'operator 4');
+        setOperator(value);
+      }
+      if (prevValue && operator && nextValue) {
+        console.log(5);
+        performOperation();
+      }
+    }
+  };
+
+  return (
+    <CalcWrapper>
+      <div className="container">
+        <div className="input">
+          <div className="result">{nextValue}</div>
+        </div>
+        <div className="keyPad">
+          <div className="keysFuntion">
+            <CalcValue keyvalue={'C'} onClick={clearData} />
+            <CalcValue keyvalue={'D'} onClick={deleteData} />
+
+            <CalcValue keyvalue={'%'} onClick={percent} />
+          </div>
+          <div className="keysOperators">
+            <CalcValue keyvalue={'+'} onClick={handleOperation} />
+            <CalcValue keyvalue={'-'} onClick={handleOperation} />
+            <CalcValue keyvalue={'*'} onClick={handleOperation} />
+            <CalcValue keyvalue={'/'} onClick={handleOperation} />
+            <CalcValue keyvalue={'='} onClick={handleOperation} />
+          </div>
+          <div className="keysNumbers">
+            <CalcValue keyvalue={9} onClick={handleOperation} />
+            <CalcValue keyvalue={8} onClick={handleOperation} />
+            <CalcValue keyvalue={7} onClick={handleOperation} />
+            <CalcValue keyvalue={6} onClick={handleOperation} />
+            <CalcValue keyvalue={5} onClick={handleOperation} />
+            <CalcValue keyvalue={4} onClick={handleOperation} />
+            <CalcValue keyvalue={3} onClick={handleOperation} />
+            <CalcValue keyvalue={2} onClick={handleOperation} />
+            <CalcValue keyvalue={1} onClick={handleOperation} />
+            <CalcValue
+              keyvalue={'.'}
+              className="keyNumDot"
+              onClick={insertDot}
+            />
+            <CalcValue
+              keyvalue={0}
+              className="keyZero"
+              onClick={handleOperation}
+            />
+            <CalcValue keyvalue={'\xB1'} onClick={plusMinus} />
+          </div>
+        </div>
+      </div>
+    </CalcWrapper>
+  );
+}
 
 export default Calculator;
