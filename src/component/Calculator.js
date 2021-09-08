@@ -6,7 +6,7 @@ const Wrapper = styled.div`
   margin: 0;
   .container {
     max-width: 400px;
-    min-height: 70vh;
+    min-height: 37vh;
     margin: 20px auto;
     background-color: #000;
     border-radius: 5px;
@@ -54,7 +54,7 @@ const Wrapper = styled.div`
     color: #fff;
     border-radius: 5px;
     padding-right: 20px;
-    /* min-height: 75px; */
+    min-height: 45px;
   }
   .subGrid1 {
     grid-area: modif;
@@ -77,11 +77,41 @@ const Wrapper = styled.div`
 `;
 
 const Calculator = () => {
-  const [input, setInput] = useState(0);
+  const [input, setInput] = useState('');
   console.log(typeof input, 'typeofInput');
   console.log(input, 'input');
   console.log(input.length, 'inputLength');
   const calcBtns = [];
+
+  // const perforOperations = () => {
+  //   switch (operation) {
+  //     case '+':
+  //       setResult(Number(firstNum) + Number(secondNum));
+  //       break;
+  //     case '-':
+  //       setResult(Number(firstNum) - Number(secondNum));
+  //       break;
+  //     case '*':
+  //       setResult(Number(firstNum) * Number(secondNum));
+  //       break;
+  //     case '/':
+  //       setResult(Number(firstNum) / Number(secondNum));
+  //       break;
+
+  //     default:
+  //       break;
+  //   }
+  // };
+
+  const onViewInput = e => {
+    setInput(input + e.target.value);
+  };
+
+  const total = e => {
+    console.log(e.target);
+    console.log(input, 'whatis');
+  };
+
   [7, 8, 9, 4, 5, 6, 1, 2, 3, '±', 0, '.'].forEach(item => {
     calcBtns.push(
       <button
@@ -89,7 +119,6 @@ const Calculator = () => {
         value={item}
         onClick={e => {
           setInput(input + e.target.value);
-          console.log('asd');
         }}
       >
         {''}
@@ -108,30 +137,43 @@ const Calculator = () => {
           <button
             onClick={() => {
               if (input.typeof === Number && input.length === undefined) {
-                setInput(0);
+                setInput('');
                 console.log('hihi');
-              } else if (input.length > 1) {
+              } else if (input.length > 0) {
                 setInput(input.substring(0, input.length - 1));
+                console.log('byrbye');
               }
+              // setInput(input.substring(0, input.length - 1));
             }}
           >
             Delete
           </button>
           <button
             onClick={e => {
-              setInput(0);
+              setInput('');
               console.log(typeof e.target);
             }}
+            value=""
           >
             AllClear
           </button>
         </div>
         <div className="subGrid2">
-          <button>/</button>
-          <button>*</button>
-          <button>-</button>
-          <button>+</button>
-          <button>=</button>
+          <button onClick={onViewInput} value="/">
+            /
+          </button>
+          <button onClick={onViewInput} value="*">
+            *
+          </button>
+          <button onClick={onViewInput} value="-">
+            -
+          </button>
+          <button onClick={onViewInput} value="+">
+            +
+          </button>
+          <button onClick={total} value="=">
+            =
+          </button>
         </div>
       </div>
     </Wrapper>
