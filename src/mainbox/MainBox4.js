@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import Todos from '../../container/Todos';
+import Todos from '../container/Todos';
 
 const MainBox4Wrapper = styled.div`
   flex: 1;

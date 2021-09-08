@@ -75,6 +75,7 @@ const CalcWrapper = styled.div`
   }
   .keysNumbers {
     grid-area: keysNumbers;
+    // rtl = right to left 오른쪽에서 왼쪽으로 방향.
     direction: rtl;
   }
   .keysNumbers button {
@@ -157,6 +158,7 @@ function Calculator() {
     // Number.isInteger() 메서드는 주어진 값이 정수인지 판별한다.
     if (Number.isInteger(value)) {
       console.log(1);
+      // parseInt 10진수
       handleNum(parseInt(value, 10));
     } else if (value in CalcOperator) {
       console.log(2);

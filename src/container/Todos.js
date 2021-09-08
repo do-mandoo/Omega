@@ -1,10 +1,10 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import Header from '../component/Header';
-import Preloader from '../component/Preloader';
-import Todo from '../component/Todo';
-import TodoInput from '../component/TodoInput';
+import Header from '../component/Todos/Header';
+import Preloader from '../component/Todos/Preloader';
+import Todo from '../component/Todos/Todo';
+import TodoInput from '../component/Todos/TodoInput';
 
 const TodosStyle = styled.div`
   padding: 0;

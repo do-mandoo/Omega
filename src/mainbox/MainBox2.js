@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import Calculator from '../Calculator';
+import Calculator from '../component/Calculator/Calculator';
 
 const MainBox2Wrapper = styled.div`
   flex: 1;
