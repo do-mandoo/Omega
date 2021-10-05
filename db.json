@@ -1,0 +1,44 @@
+{
+  "board": [
+    {
+      "id": 1,
+      "title": "제목1",
+      "body": "내용1"
+    },
+    {
+      "id": 2,
+      "title": "제목2",
+      "body": "내용2"
+    },
+    {
+      "id": 3,
+      "title": "d",
+      "datetime": "October 05, 2021 7:56:05 PM",
+      "body": "f"
+    },
+    {
+      "id": 4,
+      "title": "d",
+      "datetime": "October 05, 2021 10:47:31 PM",
+      "body": "s"
+    },
+    {
+      "id": 5,
+      "title": "f",
+      "datetime": "October 05, 2021 11:14:02 PM",
+      "body": "a"
+    },
+    {
+      "id": 6,
+      "title": "d",
+      "datetime": "October 05, 2021 11:20:42 PM",
+      "body": "f"
+    },
+    {
+      "id": 7,
+      "title": "title",
+      "datetime": "October 06, 2021 12:08:53 AM",
+      "body": "post~~~"
+    }
+  ]
+}
