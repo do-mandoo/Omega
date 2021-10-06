@@ -3,12 +3,14 @@
     {
       "id": 1,
       "title": "제목1",
-      "body": "내용1"
+      "datetime": "October 06, 2021 4:08:09 PM",
+      "body": "제목1f"
     },
     {
       "id": 2,
       "title": "제목2",
-      "body": "내용2"
+      "datetime": "October 06, 2021 4:09:46 PM",
+      "body": "제목2a"
     },
     {
       "id": 3,
