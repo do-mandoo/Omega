@@ -1,12 +1,6 @@
 {
   "board": [
     {
-      "id": 1,
-      "title": "제목1",
-      "datetime": "October 06, 2021 4:08:09 PM",
-      "body": "제목1f"
-    },
-    {
       "id": 2,
       "title": "제목2",
       "datetime": "October 06, 2021 4:09:46 PM",
@@ -19,12 +13,6 @@
       "body": "f"
     },
     {
-      "id": 4,
-      "title": "d",
-      "datetime": "October 05, 2021 10:47:31 PM",
-      "body": "s"
-    },
-    {
       "id": 5,
       "title": "f",
       "datetime": "October 05, 2021 11:14:02 PM",
@@ -35,6 +23,46 @@
       "title": "title",
       "datetime": "October 06, 2021 12:08:53 AM",
       "body": "post~~~"
+    },
+    {
+      "id": 8,
+      "title": "123",
+      "datetime": "October 06, 2021 4:21:12 PM",
+      "body": "12345"
+    },
+    {
+      "id": 9,
+      "title": "gg",
+      "datetime": "October 06, 2021 7:17:43 PM",
+      "body": "sssss"
+    },
+    {
+      "id": 10,
+      "title": "asd",
+      "datetime": "October 06, 2021 7:19:28 PM",
+      "body": "faaa24",
+      "category": "일반"
+    },
+    {
+      "id": 11,
+      "title": "asd",
+      "datetime": "October 06, 2021 7:20:22 PM",
+      "body": "fasdf",
+      "category": "질문"
+    },
+    {
+      "id": 12,
+      "title": "ff",
+      "datetime": "October 06, 2021 7:26:08 PM",
+      "body": "asasd",
+      "category": ""
+    },
+    {
+      "id": 13,
+      "title": "3232",
+      "datetime": "October 06, 2021 7:26:26 PM",
+      "body": "2fqwq",
+      "category": "질문"
     }
   ]
 }

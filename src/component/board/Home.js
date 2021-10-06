@@ -40,6 +40,11 @@ const PostWrap = styled.div`
       text-decoration: underline;
     }
   }
+  .postCategory {
+    font-size: 12px;
+    font-weight: 300;
+    border-right: 1px solid #eee;
+  }
   .postDate {
     /* background-color: skyblue; */
     width: 220px;
@@ -51,7 +56,7 @@ const PostWrap = styled.div`
   }
   .postBody {
     /* background-color: violet; */
-    width: 360px;
+    width: 300px;
     margin-left: 5px;
     :hover {
       text-decoration: underline;
@@ -61,12 +66,14 @@ const PostWrap = styled.div`
 `;
 
 // 목록들 쫘르륵
-const Post = ({ post }) => {
+const Post = ({ post, handleViewCount }) => {
   console.log(post, '12목록들쫘라락. /');
+  console.log(handleViewCount, '23409쫘라라라ㅏㄱ');
   const postBody = post.body;
   return (
     <PostWrap>
       <article>
+        <div className="postCategory">{post.category}</div>
         <Link to={`/post/${post.id}`} className="aTag">
           <div className="postLeft">
             <h2>{post.title}</h2>
@@ -82,13 +89,13 @@ const Post = ({ post }) => {
   );
 };
 
-const Home = ({ posts }) => {
+const Home = ({ posts, handleViewCount }) => {
   console.log(posts, '2993');
   return (
     <HomeWrap>
       <main>
         {posts.map(post => (
-          <Post key={post.id} post={post} />
+          <Post key={post.id} post={post} handleViewCount={handleViewCount} />
         ))}
       </main>
     </HomeWrap>

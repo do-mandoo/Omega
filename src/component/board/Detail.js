@@ -1,5 +1,5 @@
 import { useParams, Link } from 'react-router-dom';
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 
 const DetailWrap = styled.div`
@@ -36,9 +36,11 @@ const DetailWrap = styled.div`
 `;
 
 const Detail = ({ posts, handleDelete }) => {
+  const count = 0;
   console.log(posts, '124432');
   const { id } = useParams();
   const post = posts.find(post => post.id.toString() === id);
+  console.log(post, 'postpost');
   return (
     <DetailWrap>
       <main className="PostPage">
@@ -54,7 +56,7 @@ const Detail = ({ posts, handleDelete }) => {
             </Link>
             <button
               className="deleteButton"
-              // onClick={() => handleDelete(post.id)}
+              onClick={() => handleDelete(post.id)}
             >
               Delete Post
             </button>

@@ -51,6 +51,8 @@ const NewPost = ({
   setPostTitle,
   postBody,
   setPostBody,
+  postCategory,
+  setPostCategory,
 }) => {
   console.log('093248924387');
   return (
@@ -69,6 +71,18 @@ const NewPost = ({
               placeholder=" 제목을 입력하세요."
             />
           </div>
+          <label htmlFor="postTitle">질문:</label>
+          <input
+            type="radio"
+            value="질문"
+            onClick={e => setPostCategory(e.target.value)}
+          />
+          <label htmlFor="postTitle">일반:</label>
+          <input
+            type="radio"
+            value="일반"
+            onClick={e => setPostCategory(e.target.value)}
+          />
           <div className="postBodyAll">
             <label htmlFor="postBody">Post:</label>
             <textarea

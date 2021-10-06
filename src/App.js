@@ -18,6 +18,8 @@ function App() {
   const [postBody, setPostBody] = useState('');
   const [editTitle, setEditTitle] = useState('');
   const [editBody, setEditBody] = useState('');
+  const [postCategory, setPostCategory] = useState('');
+  let [viewCount, setViewCount] = useState(0);
 
   const history = useHistory();
 
@@ -49,13 +51,20 @@ function App() {
     e.preventDefault();
     const id = posts.length ? posts[posts.length - 1].id + 1 : 1;
     const datetime = format(new Date(), 'MMMM dd, yyyy pp');
-    const newPost = { id, title: postTitle, datetime, body: postBody };
+    const newPost = {
+      id,
+      title: postTitle,
+      datetime,
+      body: postBody,
+      category: postCategory,
+    };
     try {
       const res = await api.post('/board', newPost);
       const allPosts = [...posts, res.data];
       setPosts(allPosts);
       setPostTitle('');
       setPostBody('');
+      setPostCategory('');
       history.push('/');
     } catch (error) {
       console.log(error, 'error');
@@ -87,6 +96,10 @@ function App() {
     }
   };
 
+  const handleViewCount = e => {
+    // setViewCount(viewCount + 1);
+  };
+
   console.log(posts, 'posts');
 
   return (
@@ -94,7 +107,7 @@ function App() {
       <Nav />
       <Switch>
         <Route exact path="/">
-          <Home posts={posts} />
+          <Home posts={posts} handleViewCount={handleViewCount} />
         </Route>
         <Route path="/posts">
           <NewPost
@@ -103,6 +116,8 @@ function App() {
             setPostTitle={setPostTitle}
             postBody={postBody}
             setPostBody={setPostBody}
+            postCategory={postCategory}
+            setPostCategory={setPostCategory}
           />
         </Route>
         <Route path="/edit/:id">
