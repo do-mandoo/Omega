@@ -12,7 +12,7 @@
   "globals": {
     "_": false
   },
-  "plugins": ["import", "html","prettier"],
+  "plugins": ["import"],
   "extends": ["plugin:prettier/recommended","react-app"],
   "rules": {
     "prettier/prettier": "error",
