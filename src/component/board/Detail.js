@@ -49,7 +49,14 @@ const Detail = ({ posts, handleDelete }) => {
             <div className="postTop">
               <h2>{post.title}</h2>
               <p className="postDate">{post.datetime}</p>
-              <div className="viewCount">{post.view}</div>
+              <div className="viewCount">조회수:{post.view}</div>
+              <div className="starAll">
+                <label htmlFor="starCheckBox">즐겨찾기</label>
+                <input
+                  type="checkbox"
+                  onClick={e => console.log(e.target, 'checkboxtarget')}
+                />
+              </div>
               {/* <div className="viewCount">{handleViewCount}</div> */}
             </div>
             <p className="postBody">{post.body}</p>

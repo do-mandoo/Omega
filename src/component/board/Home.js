@@ -64,11 +64,11 @@ const PostWrap = styled.div`
   }
   margin: 10px;
 `;
-
+let view = 0;
 // 목록들 쫘르륵
-const Post = ({ post, handleViewCount }) => {
+const Post = ({ post }) => {
   console.log(post, '12목록들쫘라락. /');
-  console.log(handleViewCount, '23409쫘라라라ㅏㄱ');
+
   const postBody = post.body;
   return (
     <PostWrap>
@@ -89,13 +89,13 @@ const Post = ({ post, handleViewCount }) => {
   );
 };
 
-const Home = ({ posts, handleViewCount }) => {
+const Home = ({ posts }) => {
   console.log(posts, '2993');
   return (
     <HomeWrap>
       <main>
         {posts.map(post => (
-          <Post key={post.id} post={post} handleViewCount={handleViewCount} />
+          <Post key={post.id} post={post} />
         ))}
       </main>
     </HomeWrap>

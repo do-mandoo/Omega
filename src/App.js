@@ -7,6 +7,7 @@ import NewPost from './component/board/NewPost';
 import api from './api/posts';
 import { format } from 'date-fns';
 import Nav from './component/board/Nav';
+import Star from './component/board/Star';
 // import HeaderBar from './component/HeaderBar';
 // import MainView from './component/MainView';
 
@@ -20,6 +21,7 @@ function App() {
   const [editBody, setEditBody] = useState('');
   const [postCategory, setPostCategory] = useState('');
   const [viewCount, setViewCount] = useState(1);
+  const [star, setStar] = useState([]);
 
   const history = useHistory();
 
@@ -45,6 +47,11 @@ function App() {
 
     setSearchResults(filteredResults.reverse());
   }, [posts, search]);
+
+  useEffect(() => {
+    const starFilter = posts.filter(post => post.star);
+    setStar(starFilter);
+  }, [posts]);
 
   const handleSubmit = async e => {
     console.log('kljsdk-00928949');
@@ -113,6 +120,8 @@ function App() {
     } catch (error) {}
   };
 
+  const handleStar = async star => {};
+
   console.log(posts, 'posts');
 
   return (
@@ -149,6 +158,13 @@ function App() {
             handleDelete={handleDelete}
             // viewCount={viewCount}
             handleViewCount={handleViewCount}
+          />
+        </Route>
+        <Route path="/star">
+          <Star
+            posts={posts}
+            // viewCount={viewCount}
+            // handleViewCount={handleViewCount}
           />
         </Route>
       </Switch>

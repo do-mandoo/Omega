@@ -52,9 +52,11 @@ const Nav = ({ search, setSearch }) => {
               Post
             </Link>
           </li>
-          {/* <li>
-            <Link to="/about">About</Link>
-          </li> */}
+          <li>
+            <Link to="/star" className="aTag">
+              Star
+            </Link>
+          </li>
         </ul>
       </nav>
     </NavWrap>

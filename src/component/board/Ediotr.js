@@ -57,7 +57,10 @@ const Ediotr = ({
   setEditTitle,
 }) => {
   const { id } = useParams();
+  // console.log(typeof parseInt(id, 10), '여기서의id?');
   const post = posts.find(post => post.id.toString() === id);
+  // console.log(post, 'find한post의id');
+  // console.log(post.id === parseInt(id, 10), 'post.idㅜ무넝데');
 
   useEffect(() => {
     if (post) {
@@ -68,14 +71,14 @@ const Ediotr = ({
 
   return (
     <EditorWrap>
-      <main className="NewPost">
+      <main className="EditPost">
         <h2>Edit Post</h2>
-        <form className="newPostForm">
+        <form className="editPostForm">
           <div className="postTitleAll">
             <label htmlFor="postTitle">Title:</label>
             <input
               className="title"
-              onChange={e => setEditBody(e.target.value)}
+              onChange={e => setEditTitle(e.target.value)}
               value={editTitle}
               type="text"
               required
@@ -85,7 +88,7 @@ const Ediotr = ({
             <label htmlFor="postBody">Post:</label>
             <textarea
               className="text"
-              onClick={e => setEditBody(e.target.value)}
+              onChange={e => setEditBody(e.target.value)}
               value={editBody}
               required
             />
