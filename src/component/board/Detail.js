@@ -1,6 +1,7 @@
 import { useParams, Link } from 'react-router-dom';
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import Comments from './Comments';
 
 const DetailWrap = styled.div`
   max-width: 900px;
@@ -36,34 +37,40 @@ const DetailWrap = styled.div`
 `;
 
 const Detail = ({ posts, handleDelete }) => {
-  const count = 0;
   console.log(posts, '124432');
   const { id } = useParams();
-  const post = posts.find(post => post.id.toString() === id);
+  const post = posts.find(post => post.id === parseInt(id, 10));
   console.log(post, 'postpost');
   return (
-    <DetailWrap>
-      <main className="PostPage">
-        <article className="post">
-          <div className="postTop">
-            <h2>{post.title}</h2>
-            <p className="postDate">{post.datetime}</p>
-          </div>
-          <p className="postBody">{post.body}</p>
-          <div className="EdDeBtn">
-            <Link to={`/edit/${post.id}`}>
-              <button className="editButton">Edit Post</button>
-            </Link>
-            <button
-              className="deleteButton"
-              onClick={() => handleDelete(post.id)}
-            >
-              Delete Post
-            </button>
-          </div>
-        </article>
-      </main>
-    </DetailWrap>
+    <>
+      <DetailWrap>
+        <main className="PostPage">
+          <article className="post">
+            <div className="postTop">
+              <h2>{post.title}</h2>
+              <p className="postDate">{post.datetime}</p>
+              <div className="viewCount">{post.view}</div>
+              {/* <div className="viewCount">{handleViewCount}</div> */}
+            </div>
+            <p className="postBody">{post.body}</p>
+            <div className="EdDeBtn">
+              <Link to={`/edit/${post.id}`}>
+                <button className="editButton">Edit Post</button>
+              </Link>
+              <button
+                className="deleteButton"
+                onClick={() => handleDelete(post.id)}
+              >
+                Delete Post
+              </button>
+            </div>
+          </article>
+        </main>
+      </DetailWrap>
+      <div>
+        <Comments />
+      </div>
+    </>
   );
 };
 
