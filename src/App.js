@@ -19,7 +19,7 @@ function App() {
   const [editTitle, setEditTitle] = useState('');
   const [editBody, setEditBody] = useState('');
   const [postCategory, setPostCategory] = useState('');
-  let [viewCount, setViewCount] = useState(0);
+  const [viewCount, setViewCount] = useState(1);
 
   const history = useHistory();
 
@@ -36,15 +36,15 @@ function App() {
     fetchPosts();
   }, []);
 
-  // useEffect(() => {
-  //   const filteredResults = posts.filter(
-  //     post =>
-  //       post.body.includes(search.toLowerCase()) ||
-  //       post.title.includes(search.toLowerCase()),
-  //   );
+  useEffect(() => {
+    const filteredResults = posts.filter(
+      post =>
+        post.body.includes(search.toLowerCase()) ||
+        post.title.includes(search.toLowerCase()),
+    );
 
-  //   setSearchResults(filteredResults.reverse());
-  // }, [posts, search]);
+    setSearchResults(filteredResults.reverse());
+  }, [posts, search]);
 
   const handleSubmit = async e => {
     console.log('kljsdk-00928949');
@@ -57,6 +57,7 @@ function App() {
       datetime,
       body: postBody,
       category: postCategory,
+      view: viewCount,
     };
     try {
       const res = await api.post('/board', newPost);
@@ -72,10 +73,17 @@ function App() {
   };
 
   const handleEdit = async id => {
+    // e.preventDefault();
     const datetime = format(new Date(), 'MMMM dd, yyyy pp');
-    const updatePost = { id, title: editTitle, datetime, body: editBody };
+    const updatePost = {
+      title: editTitle,
+      datetime,
+      body: editBody,
+      category: postCategory,
+      view: viewCount,
+    };
     try {
-      const res = await api.put(`/board/${id}`, updatePost);
+      const res = await api.patch(`/board/${id}`, updatePost);
       setPosts(posts.map(post => (post.id === id ? { ...res.data } : post)));
       setEditTitle('');
       setEditBody('');
@@ -96,18 +104,23 @@ function App() {
     }
   };
 
-  const handleViewCount = e => {
-    // setViewCount(viewCount + 1);
+  const handleViewCount = async id => {
+    const updateView = { view: viewCount };
+    try {
+      const res = await api.put(`board/${id}`, updateView);
+      setPosts(posts.map(post => (post.id === id ? { ...res.data } : post)));
+      setViewCount(viewCount + 1);
+    } catch (error) {}
   };
 
   console.log(posts, 'posts');
 
   return (
     <>
-      <Nav />
+      <Nav search={search} setSearch={setSearch} />
       <Switch>
         <Route exact path="/">
-          <Home posts={posts} handleViewCount={handleViewCount} />
+          <Home posts={searchResults} />
         </Route>
         <Route path="/posts">
           <NewPost
@@ -131,7 +144,12 @@ function App() {
           />
         </Route>
         <Route path="/post/:id">
-          <Detail posts={posts} handleDelete={handleDelete} />
+          <Detail
+            posts={posts}
+            handleDelete={handleDelete}
+            // viewCount={viewCount}
+            handleViewCount={handleViewCount}
+          />
         </Route>
       </Switch>
     </>

@@ -27,20 +27,20 @@ const NavWrap = styled.div`
   }
 `;
 
-const Nav = () => {
+const Nav = ({ search, setSearch }) => {
   return (
     <NavWrap>
       <nav className="Nav">
-        {/* <form className="searchForm" onSubmit={e => e.preventDefault()}>
+        <form className="searchForm" onSubmit={e => e.preventDefault()}>
           <label htmlFor="search">Search Posts</label>
           <input
             id="search"
             type="text"
             placeholder="Search Posts"
-            // value={search}
-            // onChange={e => setSearch(e.target.value)}
+            value={search}
+            onChange={e => setSearch(e.target.value)}
           />
-        </form> */}
+        </form>
         <ul>
           <li>
             <Link to="/" className="aTag">
