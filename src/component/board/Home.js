@@ -1,13 +1,41 @@
-import React from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
+import api from '../../api/posts';
 
 const HomeWrap = styled.div`
   /* background-color: #eee; */
   max-width: 900px;
   margin: 10px auto;
   border-top: 10px solid yellowgreen;
+  .btn {
+    :active {
+      background-color: orange;
+      text-decoration: underline;
+    }
+  }
 `;
+
+const CategoryItems = styled.div`
+  display: flex;
+`;
+
+const CaItem = styled.div`
+  margin-right: 10px;
+  cursor: pointer;
+  background-color: #eee;
+  ${props =>
+    props.active &&
+    css`
+      background-color: skyblue;
+      font-weight: bold;
+      :hover {
+        color: #fff;
+        font-weight: 400;
+      }
+    `}
+`;
+
 const PostWrap = styled.div`
   border-bottom: 1px solid #aaa;
   article,
@@ -64,15 +92,35 @@ const PostWrap = styled.div`
   }
   margin: 10px;
 `;
-let view = 0;
 // 목록들 쫘르륵
 const Post = ({ post }) => {
-  console.log(post, '12목록들쫘라락. /');
+  // console.log(category, '12목록들쫘라락. /');
+  // const [datas, setDatas] = useState(null);
+
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     try {
+  //       const query = category === '' ? 'a' : `&category=${category}`;
+  //       const res = await api.get(`/board/${query}`);
+  //       console.log(res, 'resresres');
+  //       setDatas(res.data.data);
+  //     } catch (error) {
+  //       console.log(error, 'home에러');
+  //     }
+  //   };
+  //   fetchData();
+  // }, [category]);
+  // console.log(datas, 'datas');
 
   const postBody = post.body;
   return (
     <PostWrap>
       <article>
+        {/* <div>
+          {datas.map(d => (
+            <div key={d.id}>{d.title}</div>
+          ))}
+        </div> */}
         <div className="postCategory">{post.category}</div>
         <Link to={`/post/${post.id}`} className="aTag">
           <div className="postLeft">
@@ -90,11 +138,39 @@ const Post = ({ post }) => {
   );
 };
 
+const categories = [
+  { name: 'all', text: '전체보기' },
+  { name: 'nomal', text: '일반' },
+  { name: 'question', text: '질문' },
+];
+
+const Categories = ({ onSelect, category }) => {
+  return (
+    <CategoryItems>
+      {categories.map(c => (
+        <CaItem
+          key={c.name}
+          active={category === c.name}
+          onClick={() => onSelect(c.name, 'difsl')}
+        >
+          {c.text}
+        </CaItem>
+      ))}
+    </CategoryItems>
+  );
+};
+
 const Home = ({ posts }) => {
+  const [category, setCategory] = useState('all');
+  const onSelect = useCallback(category => setCategory(category), []);
   console.log(posts, '2993');
   return (
     <HomeWrap>
+      <Categories category={category} onSelect={onSelect} />
       <main>
+        {/* {posts.map(post => (
+          <Post key={post.id} post={post} category={category} />
+        ))} */}
         {posts.map(post => (
           <Post key={post.id} post={post} />
         ))}

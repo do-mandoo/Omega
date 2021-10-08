@@ -26,6 +26,7 @@ function App() {
 
   const history = useHistory();
 
+  // 데이터 불러와서 home파일에 props로 넘겨줌.
   useEffect(() => {
     const fetchPosts = async () => {
       try {
@@ -39,6 +40,7 @@ function App() {
     fetchPosts();
   }, []);
 
+  // 검색
   useEffect(() => {
     const filteredResults = posts.filter(
       post =>
@@ -50,11 +52,7 @@ function App() {
     setSearchResults(filteredResults.reverse());
   }, [posts, search]);
 
-  // useEffect(() => {
-  //   const starFilter = posts.filter(post => post.star);
-  //   setStar(starFilter);
-  // }, [posts]);
-
+  // 새 게시글 작성
   const handleSubmit = async e => {
     console.log('kljsdk-00928949');
     e.preventDefault();
@@ -82,6 +80,7 @@ function App() {
     }
   };
 
+  // 게시글 수정
   const handleEdit = async id => {
     // e.preventDefault();
     const datetime = format(new Date(), 'MMMM dd, yyyy pp');
@@ -104,6 +103,7 @@ function App() {
     }
   };
 
+  // 게시글 삭제
   const handleDelete = async id => {
     try {
       await api.delete(`/board/${id}`);
@@ -115,20 +115,21 @@ function App() {
     }
   };
 
+  // 조회수 증가
   const handleViewCount = async id => {
-    const updateView = { view: viewCount };
+    const updateView = { view: parseInt(viewCount, 10) + 1 };
+    console.log(updateView, '호롤로로');
     try {
-      const res = await api.patch(`board/${id}`, updateView);
-      setPosts(posts.map(post => (post.id === id ? { ...res.data } : post)));
-      setViewCount(viewCount + 1);
-    } catch (error) {}
+      const res = await api.patch(`/board/${id}`, updateView);
+      setViewCount(res);
+    } catch (error) {
+      console.log(error, 'viewCount에러');
+    }
   };
 
+  // 즐겨찾기(찜하기)
   const handleStar = async (e, id) => {
-    console.log(e, id, 'e랑 id');
-    console.log(e.target, 'starin이 있냐없냐');
     if (!e.target.classList.contains('starin')) {
-      console.log('e.target의 className에 starin이 없으면!');
       try {
         const trueStar = { star: true };
         const res = await api.patch(`/board/${id}`, trueStar);
@@ -140,7 +141,6 @@ function App() {
       }
     }
     if (!e.target.classList.contains('starout')) {
-      console.log('e.target의 className에 starout이 없으면!');
       try {
         const falseStar = { star: false };
         const res = await api.patch(`/board/${id}`, falseStar);
@@ -152,14 +152,6 @@ function App() {
       }
     }
   };
-
-  // console.log(handleStar, 'handleSTAR');
-
-  // onClick={e => {
-  //   setStar(e.target.value);
-  //   handleStar(post.id);
-  //   console.log(e.target.checked, 'checkboxtarget');
-  // };
 
   console.log(posts, 'posts');
 
@@ -195,20 +187,14 @@ function App() {
         </Route>
         <Route path="/post/:id">
           <Detail
+            handleViewCount={handleViewCount}
             posts={posts}
             handleDelete={handleDelete}
-            // viewCount={viewCount}
-            handleViewCount={handleViewCount}
-            // setStar={setStar}
             handleStar={handleStar}
           />
         </Route>
         <Route path="/star">
-          <Star
-            posts={posts}
-            // handleStar={handleStar}
-            // handleViewCount={handleViewCount}
-          />
+          <Star posts={posts} />
         </Route>
       </Switch>
     </>

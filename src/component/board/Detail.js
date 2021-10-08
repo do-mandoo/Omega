@@ -1,5 +1,5 @@
 import { useParams, Link } from 'react-router-dom';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import styled from 'styled-components';
 import Comments from './Comments';
 
@@ -41,17 +41,26 @@ const DetailWrap = styled.div`
   }
 `;
 
-const Detail = ({ posts, handleDelete, handleStar }) => {
-  useEffect(() => {
-    const starFilter = posts.filter(post => post.star);
-    console.log(starFilter, 'starFilter');
-  }, []);
-
-  // console.log(setStar, 'setstar');
+const Detail = ({ posts, handleDelete, handleStar, handleViewCount }) => {
   console.log(posts, '124432');
   const { id } = useParams();
   const post = posts.find(post => post.id === parseInt(id, 10));
   console.log(post, 'postpost');
+
+  // 리랜더링------------------- 수정 필요함.
+  const postViewW = useMemo(
+    () => posts.map(post => console.log(post.id, '4923flad')),
+    [posts],
+  );
+  console.log(postViewW, 'adfi9s');
+  useEffect(() => {
+    console.log('DetailUseEffect');
+    const postView = posts.map(post => console.log(post, '28009sdf'));
+    console.log(postView.id, '209ra0asd');
+    handleViewCount(postView);
+    // handleViewCount(postViewW.id);
+  }, [handleViewCount, posts]);
+  // ------------------------------------
 
   return (
     <>
@@ -68,25 +77,7 @@ const Detail = ({ posts, handleDelete, handleStar }) => {
                 ) : (
                   <div className="starout">즐겨찾기 추가안됨</div>
                 )}
-                {/* <label htmlFor="starCheckBox">즐겨찾기</label> */}
-                {/* {post.star === true ? (
-                  <input
-                    type="checkbox"
-                    // checked={true}
-                    // onChange={onClickStar}
-                    value={post.star}
-                    onClick={() => handleStar(post.id)}
-                  />
-                ) : (
-                  <input
-                    type="checkbox"
-                    value={post.star}
-                    // checked={false}
-                    // onChange={onClickStar}
-                  />
-                )} */}
               </div>
-              {/* <div className="viewCount">{handleViewCount}</div> */}
             </div>
             <p className="postBody">{post.body}</p>
             <div className="EdDeBtn">
