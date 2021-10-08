@@ -55,6 +55,8 @@ const Ediotr = ({
   setEditBody,
   editTitle,
   setEditTitle,
+  editCategory,
+  setEditCategory,
 }) => {
   const { id } = useParams();
   // console.log(typeof parseInt(id, 10), '여기서의id?');
@@ -66,8 +68,9 @@ const Ediotr = ({
     if (post) {
       setEditTitle(post.title);
       setEditBody(post.body);
+      setEditCategory(post.category);
     }
-  }, [post, setEditTitle, setEditBody]);
+  }, [post, setEditTitle, setEditBody, setEditCategory]);
 
   return (
     <EditorWrap>
@@ -84,6 +87,18 @@ const Ediotr = ({
               required
             />
           </div>
+          <label htmlFor="postTitle">질문:</label>
+          <input
+            type="radio"
+            value="질문"
+            onClick={e => setEditCategory(e.target.value)}
+          />
+          <label htmlFor="postTitle">일반:</label>
+          <input
+            type="radio"
+            value="일반"
+            onClick={e => setEditCategory(e.target.value)}
+          />
           <div className="postBodyAll">
             <label htmlFor="postBody">Post:</label>
             <textarea

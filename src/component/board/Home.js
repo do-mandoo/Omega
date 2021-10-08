@@ -84,6 +84,7 @@ const Post = ({ post }) => {
           <p className="postId">ID: {post.id}</p>
           <p className="postDate">{post.datetime}</p>
         </div>
+        <div className="postView">{post.view}</div>
       </article>
     </PostWrap>
   );

@@ -20,8 +20,9 @@ function App() {
   const [editTitle, setEditTitle] = useState('');
   const [editBody, setEditBody] = useState('');
   const [postCategory, setPostCategory] = useState('');
+  const [editCategory, setEditCategory] = useState('');
   const [viewCount, setViewCount] = useState(1);
-  const [star, setStar] = useState([]);
+  const [starFav, setStarFav] = useState(false);
 
   const history = useHistory();
 
@@ -43,15 +44,16 @@ function App() {
       post =>
         post.body.includes(search.toLowerCase()) ||
         post.title.includes(search.toLowerCase()),
+      // post.category.includes(search),
     );
 
     setSearchResults(filteredResults.reverse());
   }, [posts, search]);
 
-  useEffect(() => {
-    const starFilter = posts.filter(post => post.star);
-    setStar(starFilter);
-  }, [posts]);
+  // useEffect(() => {
+  //   const starFilter = posts.filter(post => post.star);
+  //   setStar(starFilter);
+  // }, [posts]);
 
   const handleSubmit = async e => {
     console.log('kljsdk-00928949');
@@ -65,6 +67,7 @@ function App() {
       body: postBody,
       category: postCategory,
       view: viewCount,
+      star: starFav,
     };
     try {
       const res = await api.post('/board', newPost);
@@ -91,6 +94,7 @@ function App() {
     };
     try {
       const res = await api.patch(`/board/${id}`, updatePost);
+      console.log(res, 'handleEdit의 res');
       setPosts(posts.map(post => (post.id === id ? { ...res.data } : post)));
       setEditTitle('');
       setEditBody('');
@@ -114,13 +118,48 @@ function App() {
   const handleViewCount = async id => {
     const updateView = { view: viewCount };
     try {
-      const res = await api.put(`board/${id}`, updateView);
+      const res = await api.patch(`board/${id}`, updateView);
       setPosts(posts.map(post => (post.id === id ? { ...res.data } : post)));
       setViewCount(viewCount + 1);
     } catch (error) {}
   };
 
-  const handleStar = async star => {};
+  const handleStar = async (e, id) => {
+    console.log(e, id, 'e랑 id');
+    console.log(e.target, 'starin이 있냐없냐');
+    if (!e.target.classList.contains('starin')) {
+      console.log('e.target의 className에 starin이 없으면!');
+      try {
+        const trueStar = { star: true };
+        const res = await api.patch(`/board/${id}`, trueStar);
+        setStarFav(res);
+        history.push('/');
+        history.go(); // refresh
+      } catch (error) {
+        console.log(error, '즐겨찾기오류');
+      }
+    }
+    if (!e.target.classList.contains('starout')) {
+      console.log('e.target의 className에 starout이 없으면!');
+      try {
+        const falseStar = { star: false };
+        const res = await api.patch(`/board/${id}`, falseStar);
+        setStarFav(res);
+        history.push('/');
+        history.go(); // refresh
+      } catch (error) {
+        console.log(error, '즐겨찾기오류');
+      }
+    }
+  };
+
+  // console.log(handleStar, 'handleSTAR');
+
+  // onClick={e => {
+  //   setStar(e.target.value);
+  //   handleStar(post.id);
+  //   console.log(e.target.checked, 'checkboxtarget');
+  // };
 
   console.log(posts, 'posts');
 
@@ -150,6 +189,8 @@ function App() {
             setEditTitle={setEditTitle}
             editBody={editBody}
             setEditBody={setEditBody}
+            editCategory={editCategory}
+            setEditCategory={setEditCategory}
           />
         </Route>
         <Route path="/post/:id">
@@ -158,12 +199,14 @@ function App() {
             handleDelete={handleDelete}
             // viewCount={viewCount}
             handleViewCount={handleViewCount}
+            // setStar={setStar}
+            handleStar={handleStar}
           />
         </Route>
         <Route path="/star">
           <Star
             posts={posts}
-            // viewCount={viewCount}
+            // handleStar={handleStar}
             // handleViewCount={handleViewCount}
           />
         </Route>
