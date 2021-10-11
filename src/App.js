@@ -26,7 +26,7 @@ function App() {
 
   const history = useHistory();
 
-  // 데이터 불러와서 home파일에 props로 넘겨줌.
+  // 데이터 불러와서 home.js파일에 props로 넘겨줌.
   useEffect(() => {
     const fetchPosts = async () => {
       try {
@@ -127,7 +127,7 @@ function App() {
     }
   };
 
-  // 즐겨찾기(찜하기)
+  // 즐겨찾기(찜하기) vanilla js부분으로 동작하게 함. react스럽게 하기.
   const handleStar = async (e, id) => {
     if (!e.target.classList.contains('starin')) {
       try {

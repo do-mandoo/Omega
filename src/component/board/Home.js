@@ -92,35 +92,11 @@ const PostWrap = styled.div`
   }
   margin: 10px;
 `;
-// 목록들 쫘르륵
-const Post = ({ post }) => {
-  // console.log(category, '12목록들쫘라락. /');
-  // const [datas, setDatas] = useState(null);
 
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     try {
-  //       const query = category === '' ? 'a' : `&category=${category}`;
-  //       const res = await api.get(`/board/${query}`);
-  //       console.log(res, 'resresres');
-  //       setDatas(res.data.data);
-  //     } catch (error) {
-  //       console.log(error, 'home에러');
-  //     }
-  //   };
-  //   fetchData();
-  // }, [category]);
-  // console.log(datas, 'datas');
-
-  const postBody = post.body;
+const PostItem = ({ post }) => {
   return (
-    <PostWrap>
-      <article>
-        {/* <div>
-          {datas.map(d => (
-            <div key={d.id}>{d.title}</div>
-          ))}
-        </div> */}
+    <>
+      <article key={post.id}>
         <div className="postCategory">{post.category}</div>
         <Link to={`/post/${post.id}`} className="aTag">
           <div className="postLeft">
@@ -134,8 +110,45 @@ const Post = ({ post }) => {
         </div>
         <div className="postView">{post.view}</div>
       </article>
-    </PostWrap>
+    </>
   );
+};
+
+// 목록들 쫘르륵
+const Post = ({ posts, category }) => {
+  if (category === 'all') {
+    return (
+      <PostWrap>
+        {posts.map(post => {
+          return <PostItem key={post.id} post={post} />;
+        })}
+      </PostWrap>
+    );
+  } else if (category === 'nomal') {
+    return (
+      <PostWrap>
+        {posts.map(post => {
+          return post.category === 'nomal' ? (
+            <PostItem key={post.id} post={post} />
+          ) : (
+            ''
+          );
+        })}
+      </PostWrap>
+    );
+  } else if (category === 'question') {
+    return (
+      <PostWrap>
+        {posts.map(post => {
+          return post.category === 'question' ? (
+            <PostItem key={post.id} post={post} />
+          ) : (
+            ''
+          );
+        })}
+      </PostWrap>
+    );
+  } else return;
 };
 
 const categories = [
@@ -151,7 +164,7 @@ const Categories = ({ onSelect, category }) => {
         <CaItem
           key={c.name}
           active={category === c.name}
-          onClick={() => onSelect(c.name, 'difsl')}
+          onClick={() => onSelect(c.name)}
         >
           {c.text}
         </CaItem>
@@ -161,19 +174,17 @@ const Categories = ({ onSelect, category }) => {
 };
 
 const Home = ({ posts }) => {
+  console.log(posts, 'postsposts!');
   const [category, setCategory] = useState('all');
+
   const onSelect = useCallback(category => setCategory(category), []);
-  console.log(posts, '2993');
+  console.log(category, '2993');
+
   return (
     <HomeWrap>
       <Categories category={category} onSelect={onSelect} />
       <main>
-        {/* {posts.map(post => (
-          <Post key={post.id} post={post} category={category} />
-        ))} */}
-        {posts.map(post => (
-          <Post key={post.id} post={post} />
-        ))}
+        <Post posts={posts} category={category} />
       </main>
     </HomeWrap>
   );
