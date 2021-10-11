@@ -107,10 +107,10 @@ function App() {
   // 게시글 삭제
   const handleDelete = async id => {
     try {
+      // const id = posts.filter(post => post.id !== id);
       await api.delete(`/board/${id}`);
-      const postsList = posts.filter(post => post.id !== id);
-      setPosts(postsList);
       history.push('/');
+      history.go();
     } catch (error) {
       console.log(error, 'error');
     }
