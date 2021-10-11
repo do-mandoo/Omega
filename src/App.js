@@ -88,7 +88,7 @@ function App() {
       title: editTitle,
       datetime,
       body: editBody,
-      category: postCategory,
+      category: editCategory,
       view: viewCount,
     };
     try {
@@ -97,6 +97,7 @@ function App() {
       setPosts(posts.map(post => (post.id === id ? { ...res.data } : post)));
       setEditTitle('');
       setEditBody('');
+      setEditCategory('');
       history.push('/');
     } catch (error) {
       console.log(error, 'error');

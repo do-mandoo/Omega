@@ -74,13 +74,13 @@ const NewPost = ({
           <label htmlFor="postTitle">질문:</label>
           <input
             type="radio"
-            value="질문"
+            value="question"
             onClick={e => setPostCategory(e.target.value)}
           />
           <label htmlFor="postTitle">일반:</label>
           <input
             type="radio"
-            value="일반"
+            value="nomal"
             onClick={e => setPostCategory(e.target.value)}
           />
           <div className="postBodyAll">

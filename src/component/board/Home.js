@@ -95,7 +95,7 @@ const PostWrap = styled.div`
 
 const PostItem = ({ post }) => {
   return (
-    <>
+    <PostWrap>
       <article key={post.id}>
         <div className="postCategory">{post.category}</div>
         <Link to={`/post/${post.id}`} className="aTag">
@@ -110,7 +110,7 @@ const PostItem = ({ post }) => {
         </div>
         <div className="postView">{post.view}</div>
       </article>
-    </>
+    </PostWrap>
   );
 };
 
@@ -118,15 +118,15 @@ const PostItem = ({ post }) => {
 const Post = ({ posts, category }) => {
   if (category === 'all') {
     return (
-      <PostWrap>
+      <>
         {posts.map(post => {
           return <PostItem key={post.id} post={post} />;
         })}
-      </PostWrap>
+      </>
     );
   } else if (category === 'nomal') {
     return (
-      <PostWrap>
+      <>
         {posts.map(post => {
           return post.category === 'nomal' ? (
             <PostItem key={post.id} post={post} />
@@ -134,11 +134,11 @@ const Post = ({ posts, category }) => {
             ''
           );
         })}
-      </PostWrap>
+      </>
     );
   } else if (category === 'question') {
     return (
-      <PostWrap>
+      <>
         {posts.map(post => {
           return post.category === 'question' ? (
             <PostItem key={post.id} post={post} />
@@ -146,7 +146,7 @@ const Post = ({ posts, category }) => {
             ''
           );
         })}
-      </PostWrap>
+      </>
     );
   } else return;
 };
