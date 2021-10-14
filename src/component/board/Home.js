@@ -1,7 +1,6 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { Link } from 'react-router-dom';
 import styled, { css } from 'styled-components';
-import api from '../../api/posts';
 
 const HomeWrap = styled.div`
   /* background-color: #eee; */
@@ -116,39 +115,11 @@ const PostItem = ({ post }) => {
 
 // 목록들 쫘르륵
 const Post = ({ posts, category }) => {
-  if (category === 'all') {
-    return (
-      <>
-        {posts.map(post => {
-          return <PostItem key={post.id} post={post} />;
-        })}
-      </>
-    );
-  } else if (category === 'nomal') {
-    return (
-      <>
-        {posts.map(post => {
-          return post.category === 'nomal' ? (
-            <PostItem key={post.id} post={post} />
-          ) : (
-            ''
-          );
-        })}
-      </>
-    );
-  } else if (category === 'question') {
-    return (
-      <>
-        {posts.map(post => {
-          return post.category === 'question' ? (
-            <PostItem key={post.id} post={post} />
-          ) : (
-            ''
-          );
-        })}
-      </>
-    );
-  } else return;
+  const filterd = posts.filter(
+    post => category === 'all' || post.category === category,
+  );
+  console.log(filterd, 'filted허허허허');
+  return filterd.map(fi => <PostItem key={fi.id} post={fi} />);
 };
 
 const categories = [
