@@ -33,10 +33,13 @@ const NavWrap = styled.div`
 `;
 
 const Nav = ({ search, setSearch }) => {
+  // 로컬스토리지에 로그인정보를 json형식으로 받아서 저장.
+  // getLogin변수로 화면상의 로그인/로그아웃,회원가입 과 Post페이지의 toggle역할을 하게 됨.
   const getLogin = JSON.parse(localStorage.getItem('OmegaLogin'));
 
   console.log(getLogin, '23904');
 
+  // 로그아웃이 되면 로컬스토리지에 저장한 로그인정보를 삭제시키고 홈페이지로 돌아간다.
   const Logout = () => {
     localStorage.removeItem('OmegaLogin');
     window.location.href = '/';
@@ -61,6 +64,7 @@ const Nav = ({ search, setSearch }) => {
               Home
             </Link>
           </li>
+          {/* 로그인이 되었을 때만 포스트 작성할 수 있음. */}
           {getLogin && (
             <li className="newPost">
               <Link to="/posts" className="aTag">
