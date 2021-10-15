@@ -8,6 +8,8 @@ import api from './api/posts';
 import { format } from 'date-fns';
 import Nav from './component/board/Nav';
 import Star from './component/board/Star';
+import Signup from './component/board/Signup';
+import Login from './component/board/Login';
 // import HeaderBar from './component/HeaderBar';
 // import MainView from './component/MainView';
 
@@ -23,6 +25,11 @@ function App() {
   const [editCategory, setEditCategory] = useState('');
   const [viewCount, setViewCount] = useState(1);
   const [starFav, setStarFav] = useState(false);
+
+  const [idValue, setIdValue] = useState('');
+  const [pwValue, setPwValue] = useState('');
+  const [rePwValue, setRePwValue] = useState('');
+  const [nickName, setNickName] = useState('');
 
   const history = useHistory();
 
@@ -53,19 +60,48 @@ function App() {
   }, [posts, search]);
 
   // 새 게시글 작성
-  const handleSubmit = async e => {
+  const handleSubmit = async (e, id) => {
     console.log('kljsdk-00928949');
     e.preventDefault();
-    const id = posts.length ? posts[posts.length - 1].id + 1 : 1;
+    // const id = posts.length ? posts[posts.length - 1].id + 1 : 1;
     const datetime = format(new Date(), 'MMMM dd, yyyy pp');
     const newPost = {
-      id,
       title: postTitle,
       datetime,
       body: postBody,
       category: postCategory,
       view: viewCount,
       star: starFav,
+    };
+    try {
+      const res = await api.post(`/board/${id}`, newPost);
+      const allPosts = [...posts, res.data];
+      setPosts(allPosts);
+      setPostTitle('');
+      setPostBody('');
+      setPostCategory('');
+      history.push('/');
+    } catch (error) {
+      console.log(error, 'error');
+    }
+  };
+
+  // 회원가입
+  const SignUpHandleSubmit = async e => {
+    console.log('kljsdk-00928949');
+    e.preventDefault();
+    const id = posts.length ? posts[posts.length - 1].id + 1 : 1;
+    // const datetime = format(new Date(), 'MMMM dd, yyyy pp');
+    const newPost = {
+      id,
+      nickName: idValue,
+      pw: pwValue,
+      title: '',
+      datetime: '',
+      body: '',
+      category: '',
+      view: 1,
+      star: false,
     };
     try {
       const res = await api.post('/board', newPost);
@@ -162,6 +198,22 @@ function App() {
       <Switch>
         <Route exact path="/">
           <Home posts={searchResults} />
+        </Route>
+        <Route path="/signup">
+          <Signup
+            idValue={idValue}
+            setIdValue={setIdValue}
+            pwValue={pwValue}
+            setPwValue={setPwValue}
+            rePwValue={rePwValue}
+            setRePwValue={setRePwValue}
+            nickName={nickName}
+            setNickName={setNickName}
+            SignUpHandleSubmit={SignUpHandleSubmit}
+          />
+        </Route>
+        <Route path="/login">
+          <Login posts={posts} />
         </Route>
         <Route path="/posts">
           <NewPost

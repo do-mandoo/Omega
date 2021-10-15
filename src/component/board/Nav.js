@@ -1,5 +1,7 @@
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import api from '../../api/posts';
 
 const NavWrap = styled.div`
   border-bottom: 1px solid #ccc;
@@ -25,9 +27,21 @@ const NavWrap = styled.div`
       text-decoration: underline;
     }
   }
+  .goLogout {
+    cursor: pointer;
+  }
 `;
 
 const Nav = ({ search, setSearch }) => {
+  const getLogin = JSON.parse(localStorage.getItem('OmegaLogin'));
+
+  console.log(getLogin, '23904');
+
+  const Logout = () => {
+    localStorage.removeItem('OmegaLogin');
+    window.location.href = '/';
+  };
+
   return (
     <NavWrap>
       <nav className="Nav">
@@ -47,17 +61,35 @@ const Nav = ({ search, setSearch }) => {
               Home
             </Link>
           </li>
-          <li>
-            <Link to="/posts" className="aTag">
-              Post
-            </Link>
-          </li>
+          {getLogin && (
+            <li className="newPost">
+              <Link to="/posts" className="aTag">
+                Post
+              </Link>
+            </li>
+          )}
           <li>
             <Link to="/star" className="aTag">
               Star
             </Link>
           </li>
         </ul>
+        <div className="toggleWrap">
+          {getLogin ? (
+            <div className="goLogout" onClick={Logout}>
+              로그아웃
+            </div>
+          ) : (
+            <>
+              <div className="goLogin">
+                <Link to="/login">로그인</Link>
+              </div>
+              <div className="goSignup">
+                <Link to="/signup">회원가입</Link>
+              </div>
+            </>
+          )}
+        </div>
       </nav>
     </NavWrap>
   );
