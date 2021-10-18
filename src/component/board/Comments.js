@@ -1,9 +1,30 @@
 import React, { useState } from 'react';
+import styled from 'styled-components';
+
+const CommentsWrapper = styled.div`
+  max-width: 890px;
+  border: 1px solid #ddd;
+  margin: 50px auto;
+  /* border-top: 10px solid purple; */
+  padding-left: 10px;
+`;
+
+const CommentItemWrap = styled.div`
+  display: flex;
+  margin-top: 10px;
+  border-bottom: 1px solid #ccc;
+  button {
+    margin-left: 10px;
+  }
+`;
 
 const CommentItem = ({ comment, onRemove }) => {
   return (
-    <div>
-      <div>{comment}</div>
+    <CommentItemWrap>
+      <div>
+        {comment}&nbsp;-&nbsp;
+        {new Date().toLocaleString()}
+      </div>
       <button
         onClick={() => {
           onRemove(comment);
@@ -11,7 +32,7 @@ const CommentItem = ({ comment, onRemove }) => {
       >
         삭제
       </button>
-    </div>
+    </CommentItemWrap>
   );
 };
 
@@ -49,7 +70,7 @@ const Comments = () => {
   };
 
   return (
-    <div>
+    <CommentsWrapper>
       <h4>댓글</h4>
       <form onSubmit={onSubmit}>
         <input
@@ -60,7 +81,7 @@ const Comments = () => {
         <button type="submit">댓글 추가</button>
       </form>
       <CommentList comments={localComments} onRemove={onRemove} />
-    </div>
+    </CommentsWrapper>
   );
 };
 
