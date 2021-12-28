@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import api from '../../api/posts';
+import WeatherApp from '../weather/WeatherApp';
 
 const NavWrap = styled.div`
   border-bottom: 1px solid #ccc;
@@ -17,7 +18,6 @@ const NavWrap = styled.div`
     display: flex;
   }
   li {
-    font-size: 20px;
     font-weight: bold;
   }
   .aTag {
@@ -29,6 +29,47 @@ const NavWrap = styled.div`
   }
   .goLogout {
     cursor: pointer;
+  }
+  .Nav {
+    display: flex;
+    width: 900px;
+    justify-content: center;
+    /* border: 4px dashed red; */
+    position: relative;
+    margin: 10px auto;
+  }
+  .mainCategory {
+    /* background-color: #eeee40; */
+
+    line-height: 2.5;
+    a {
+      font-size: 25px;
+    }
+  }
+  .searchForm {
+    /* background-color: tomato; */
+    /* display: flex; */
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    input {
+      margin-left: 10px;
+    }
+  }
+  .toggleWrap {
+    display: flex;
+    /* background-color: skyblue; */
+    position: absolute;
+    right: 0;
+    top: 0;
+    a {
+      text-decoration: none;
+      padding: 8px;
+      &:hover {
+        color: red;
+        font-weight: 600;
+      }
+    }
   }
 `;
 
@@ -47,18 +88,9 @@ const Nav = ({ search, setSearch }) => {
 
   return (
     <NavWrap>
+      <WeatherApp />
       <nav className="Nav">
-        <form className="searchForm" onSubmit={e => e.preventDefault()}>
-          <label htmlFor="search">Search Posts</label>
-          <input
-            id="search"
-            type="text"
-            placeholder="Search Posts"
-            value={search}
-            onChange={e => setSearch(e.target.value)}
-          />
-        </form>
-        <ul>
+        <ul className="mainCategory">
           <li>
             <Link to="/" className="aTag">
               Home
@@ -78,6 +110,19 @@ const Nav = ({ search, setSearch }) => {
             </Link>
           </li>
         </ul>
+
+        <form className="searchForm" onSubmit={e => e.preventDefault()}>
+          <label htmlFor="search">Search Posts</label>
+          <input
+            id="search"
+            type="text"
+            placeholder="Search Posts"
+            autocomplete="off"
+            value={search}
+            onChange={e => setSearch(e.target.value)}
+          />
+        </form>
+
         <div className="toggleWrap">
           {getLogin ? (
             <div className="goLogout" onClick={Logout}>
