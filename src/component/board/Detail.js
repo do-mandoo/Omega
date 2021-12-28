@@ -48,18 +48,18 @@ const Detail = ({ posts, handleDelete, handleStar, handleViewCount }) => {
   console.log(post, 'postpost');
 
   // 리랜더링------------------- 수정 필요함.
-  const postViewW = useMemo(
-    () => posts.map(post => console.log(post.id, '4923flad')),
-    [posts],
-  );
-  console.log(postViewW, 'adfi9s');
-  useEffect(() => {
-    console.log('DetailUseEffect');
-    const postView = posts.map(post => console.log(post, '28009sdf'));
-    console.log(postView.id, '209ra0asd');
-    handleViewCount(postView);
-    // handleViewCount(postViewW.id);
-  }, [handleViewCount, posts]);
+  // const postViewW = useMemo(
+  //   () => posts.map(post => console.log(post.id, '4923flad')),
+  //   [posts],
+  // );
+  // console.log(postViewW, 'adfi9s');
+  // useEffect(() => {
+  //   console.log('DetailUseEffect');
+  //   const postView = posts.map(post => console.log(post, '28009sdf'));
+  //   console.log(postView.id, '209ra0asd');
+  //   handleViewCount(postView);
+  //   // handleViewCount(postViewW.id);
+  // }, [handleViewCount, posts]);
   // ------------------------------------
 
   return (

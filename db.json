@@ -1,89 +1,58 @@
 {
   "board": [
     {
-      "id": 2,
-      "title": "제목2",
-      "datetime": "October 06, 2021 4:09:46 PM",
-      "body": "제목2a"
+      "id": 1,
+      "title": "첫 게시글",
+      "datetime": "October 09, 2021 12:01:18 AM",
+      "body": "안녕하세요",
+      "category": "nomal",
+      "view": 1,
+      "star": true
     },
     {
-      "id": 3,
-      "title": "dtrue",
-      "datetime": "October 05, 2021 7:56:05 PM",
-      "body": "f",
-      "star":true
+      "id": 4,
+      "title": "두번째 게시글입니다.",
+      "datetime": "October 09, 2021 12:01:39 AM",
+      "body": "반갑습니다?",
+      "category": "question",
+      "view": 1,
+      "star": false
+    },
+    {
+      "id": 2,
+      "title": "게시글입니다.",
+      "datetime": "October 11, 2021 4:33:04 PM",
+      "body": "반갑습니다?",
+      "category": "question",
+      "view": 1,
+      "star": false
     },
     {
       "id": 5,
-      "title": "ftrue",
-      "datetime": "October 07, 2021 1:42:58 PM",
-      "body": "a",
-      "category": "",
+      "title": "칭긔층긔",
+      "datetime": "October 11, 2021 7:50:29 PM",
+      "body": "반가웡?????ㅎㅎ",
+      "category": "question",
       "view": 1,
-      "star":true
+      "star": true
+    },
+    {
+      "id": 6,
+      "title": "일반입니다.",
+      "datetime": "October 11, 2021 7:54:22 PM",
+      "body": "내용입니다.",
+      "category": "nomal",
+      "view": 1,
+      "star": true
     },
     {
       "id": 7,
-      "title": "title",
-      "datetime": "October 06, 2021 12:08:53 AM",
-      "body": "post~~~",
-      "star":false
-    },
-    {
-      "id": 8,
-      "title": "123ㅁ",
-      "datetime": "October 07, 2021 12:52:32 PM",
-      "body": "12345",
-      "category": "",
-      "view": 1
-    },
-    {
-      "id": 9,
-      "title": "123edits",
-      "datetime": "October 07, 2021 1:42:47 PM",
-      "body": "ggsㅁㄴㅇㄹ",
-      "category": "",
-      "view": 1
-    },
-    {
-      "id": 10,
-      "title": "asd",
-      "datetime": "October 06, 2021 7:19:28 PM",
-      "body": "faaa24",
-      "category": "일반"
-    },
-    {
-      "id": 11,
-      "title": "asd",
-      "datetime": "October 06, 2021 7:20:22 PM",
-      "body": "fasdf",
-      "category": "질문"
-    },
-    {
-      "id": 13,
-      "title": "3232false",
-      "datetime": "October 07, 2021 2:56:12 PM",
-      "body": "2fqwqㄴㄴ",
-      "category": "",
+      "title": "wls",
+      "body": "fasdff",
+      "category": "nomal",
       "view": 1,
-      "star":false
-    },
-    {
-      "id": 14,
-      "title": "test`1",
-      "datetime": "October 07, 2021 1:58:34 PM",
-      "body": "testtest 테스트",
-      "category": "",
-      "view": 1
-    },
-    {
-      "id": 15,
-      "title": "ㅓtrue",
-      "datetime": "October 07, 2021 1:56:52 PM",
-      "body": "ㅏㅍㅇㅍㅇ",
-      "category": "",
-      "view": 1,
-      "star":true
+      "star": false,
+      "datetime": "December 06 2021, 8:56:11 PM"
     }
   ]
 }

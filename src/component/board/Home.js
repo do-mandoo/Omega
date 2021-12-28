@@ -1,6 +1,7 @@
 import React, { useCallback, useState } from 'react';
 import { Link } from 'react-router-dom';
 import styled, { css } from 'styled-components';
+import NewsApp from '../News/NewsApp';
 
 const HomeWrap = styled.div`
   /* background-color: #eee; */
@@ -71,6 +72,8 @@ const PostWrap = styled.div`
     font-size: 12px;
     font-weight: 300;
     border-right: 1px solid #eee;
+    width: 50px;
+    text-align: center;
   }
   .postDate {
     /* background-color: skyblue; */
@@ -83,7 +86,7 @@ const PostWrap = styled.div`
   }
   .postBody {
     /* background-color: violet; */
-    width: 300px;
+    width: 200px;
     margin-left: 5px;
     :hover {
       text-decoration: underline;
@@ -157,6 +160,9 @@ const Home = ({ posts }) => {
       <main>
         <Post posts={posts} category={category} />
       </main>
+      <div>
+        <NewsApp />
+      </div>
     </HomeWrap>
   );
 };

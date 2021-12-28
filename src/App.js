@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Route, Switch, useHistory } from 'react-router-dom';
+import { BrowserRouter, Route, Switch, useHistory } from 'react-router-dom';
 import Detail from './component/board/Detail';
 import Ediotr from './component/board/Ediotr';
 import Home from './component/board/Home';
@@ -10,8 +10,6 @@ import Nav from './component/board/Nav';
 import Star from './component/board/Star';
 import Signup from './component/board/Signup';
 import Login from './component/board/Login';
-// import HeaderBar from './component/HeaderBar';
-// import MainView from './component/MainView';
 
 function App() {
   const [posts, setPosts] = useState([]);
@@ -64,7 +62,7 @@ function App() {
     console.log('kljsdk-00928949');
     e.preventDefault();
     // const id = posts.length ? posts[posts.length - 1].id + 1 : 1;
-    const datetime = format(new Date(), 'MMMM dd, yyyy pp');
+    const datetime = format(new Date(), 'MMMM dd yyyy, pp');
     const newPost = {
       title: postTitle,
       datetime,
@@ -82,7 +80,7 @@ function App() {
       setPostCategory('');
       history.push('/');
     } catch (error) {
-      console.log(error, 'error');
+      console.log(error, '새게시글작성error');
     }
   };
 
@@ -119,7 +117,7 @@ function App() {
   // 게시글 수정
   const handleEdit = async id => {
     // e.preventDefault();
-    const datetime = format(new Date(), 'MMMM dd, yyyy pp');
+    const datetime = format(new Date(), 'MMMM dd yyyy, pp');
     const updatePost = {
       title: editTitle,
       datetime,
@@ -194,6 +192,7 @@ function App() {
 
   return (
     <>
+      {/* <BrowserRouter> */}
       <Nav search={search} setSearch={setSearch} />
       <Switch>
         <Route exact path="/">
@@ -250,6 +249,7 @@ function App() {
           <Star posts={posts} />
         </Route>
       </Switch>
+      {/* </BrowserRouter> */}
     </>
   );
 }
