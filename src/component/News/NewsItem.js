@@ -15,6 +15,7 @@ const NewsItemWrap = styled.div`
   .contents {
     h2 {
       margin: 0;
+      font-size: 14px;
       a {
         color: #000;
       }

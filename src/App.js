@@ -58,10 +58,10 @@ function App() {
   }, [posts, search]);
 
   // 새 게시글 작성
-  const handleSubmit = async (e, id) => {
+  const handleSubmit = async e => {
     console.log('kljsdk-00928949');
     e.preventDefault();
-    // const id = posts.length ? posts[posts.length - 1].id + 1 : 1;
+    const id = posts.length ? posts[posts.length - 1].id + 1 : 1;
     const datetime = format(new Date(), 'MMMM dd yyyy, pp');
     const newPost = {
       title: postTitle,

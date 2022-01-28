@@ -3,16 +3,29 @@ import { Link } from 'react-router-dom';
 import styled, { css } from 'styled-components';
 import NewsApp from '../News/NewsApp';
 
+const HomeBlock = styled.div`
+  margin: 10px auto;
+  width: 1200px;
+`;
 const HomeWrap = styled.div`
   /* background-color: #eee; */
-  max-width: 900px;
-  margin: 10px auto;
-  border-top: 10px solid yellowgreen;
-  .btn {
-    :active {
-      background-color: orange;
-      text-decoration: underline;
+  /* position: relative; */
+  display: flex;
+  width: 1000%;
+  margin: 0 auto;
+  main {
+    border-top: 10px solid yellowgreen;
+    .btn {
+      :active {
+        background-color: orange;
+        text-decoration: underline;
+      }
     }
+  }
+  aside {
+    margin-left: 40px;
+    width: 500px;
+    /* border: 1px solid red; */
   }
 `;
 
@@ -95,7 +108,32 @@ const PostWrap = styled.div`
   margin: 10px;
 `;
 
+const ULList = styled.ul`
+  display: flex;
+  padding: 5px 15px;
+  li {
+    list-style: none;
+    margin-left: 20px;
+  }
+  .topListsName1 {
+    width: 50px;
+  }
+  .topListsName2 {
+    width: 130px;
+  }
+  .topListsName3 {
+    width: 220px;
+  }
+  .topListsName4 {
+    width: 90px;
+  }
+  .topListsName5 {
+    width: 200px;
+  }
+`;
+
 const PostItem = ({ post }) => {
+  console.log(post, '에헤헤헤 하나의 post~~');
   return (
     <PostWrap>
       <article key={post.id}>
@@ -122,7 +160,21 @@ const Post = ({ posts, category }) => {
     post => category === 'all' || post.category === category,
   );
   console.log(filterd, 'filted허허허허');
-  return filterd.map(fi => <PostItem key={fi.id} post={fi} />);
+  return (
+    <>
+      <ULList>
+        <li className="topListsName1">분류</li>
+        <li className="topListsName2">제목</li>
+        <li className="topListsName3">내용</li>
+        <li className="topListsName4">ID</li>
+        <li className="topListsName5">작성일</li>
+        <li className="topListsName6">조회수</li>
+      </ULList>
+      {filterd.map(fi => (
+        <PostItem key={fi.id} post={fi} />
+      ))}
+    </>
+  );
 };
 
 const categories = [
@@ -155,15 +207,17 @@ const Home = ({ posts }) => {
   console.log(category, '2993');
 
   return (
-    <HomeWrap>
+    <HomeBlock>
       <Categories category={category} onSelect={onSelect} />
-      <main>
-        <Post posts={posts} category={category} />
-      </main>
-      <div>
-        <NewsApp />
-      </div>
-    </HomeWrap>
+      <HomeWrap>
+        <main>
+          <Post posts={posts} category={category} />
+        </main>
+        {/* <aside>
+          <NewsApp />
+        </aside> */}
+      </HomeWrap>
+    </HomeBlock>
   );
 };
 

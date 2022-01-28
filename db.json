@@ -53,6 +53,17 @@
       "view": 1,
       "star": false,
       "datetime": "December 06 2021, 8:56:11 PM"
+    },
+    {
+      "id": 8,
+      "nickName": "bucks",
+      "pw": "1234",
+      "title": "",
+      "datetime": "",
+      "body": "",
+      "category": "",
+      "view": 1,
+      "star": false
     }
   ]
 }

@@ -14,17 +14,21 @@ const CategoryLists = [
 const CategoriesWrap = styled.div`
   display: flex;
   padding: 16px;
-  width: 650px;
+  /* width: 650px; */
+  width: 400px;
   margin: 0 auto;
+  border: 1px solid red;
 `;
 
 const Category = styled.div`
-  font-size: 20px;
+  /* font-size: 20px; */
+  font-size: 12px;
   cursor: pointer;
   white-space: pre;
   text-decoration: none;
   color: inherit;
   padding-bottom: 4px;
+
   &:hover {
     color: #490507;
   }

@@ -1,6 +1,14 @@
 import React, { useCallback, useState } from 'react';
+import styled from 'styled-components';
 import Categories from './Categories';
 import NewsList from './NewsList';
+
+const NewsAppBlock = styled.div`
+  /* max-height: 400px; */
+  /* box-sizing: border-box; */
+  /* border: 1px dashed blue; */
+  /* height: 400px; */
+`;
 
 const NewsApp = () => {
   // 카테고리 상태를 useState로관리.
@@ -9,10 +17,10 @@ const NewsApp = () => {
   const onSelect = useCallback(category => setCategory(category), []);
 
   return (
-    <div>
+    <NewsAppBlock>
       <Categories category={category} onSelect={onSelect} />
       <NewsList category={category} />
-    </div>
+    </NewsAppBlock>
   );
 };
 

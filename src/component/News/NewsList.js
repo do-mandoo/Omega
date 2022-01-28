@@ -6,7 +6,10 @@ import NewsItem from './NewsItem';
 const NewsWrap = styled.div`
   box-sizing: border-box;
   padding-bottom: 48px;
-  width: 768px;
+  /* width: 768px; */
+  overflow: auto;
+  height: 500px;
+  width: 430px;
   margin: 0 auto;
   margin-top: 32px;
   border: 1px solid rgba(0, 0, 0, 0.05);
