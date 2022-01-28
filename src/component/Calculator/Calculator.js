@@ -42,10 +42,8 @@ const CalcWrapper = styled.div`
     width: 300px;
     height: 350px;
     display: grid;
-    /* border: 1px solid red; */
     margin: auto;
     margin-top: 10px;
-    /* background-color: lightgray; */
     padding: 10px;
     border: ridge;
   }
@@ -53,7 +51,6 @@ const CalcWrapper = styled.div`
     display: grid;
     grid-template-columns: repeat(4, 75px);
     grid-template-rows: repeat(5, 58px);
-    /* grid-gap: 1px; */
     grid-template-areas:
       'keysFuntion keysFuntion keysFuntion keysOperators'
       'keysNumbers keysNumbers keysNumbers keysOperators'
